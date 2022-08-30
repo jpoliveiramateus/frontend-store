@@ -1,0 +1,103 @@
+/* stylelint-disable selector-max-specificity */
+
+@media screen and ( min-width : 768px ) {
+
+  .icon-menu {
+    display: none;
+  }
+
+}
+
+header div input {
+  font-weight: 300;
+}
+
+header div input::placeholder {
+  font-weight: 100;
+}
+
+.menu {
+  animation: animate-nav 1s;
+  background-color: #fff059;
+  padding: 1rem;
+  width: 100%;
+}
+
+.menu-closed {
+  display: none;
+}
+
+@keyframes animate-nav {
+
+  from {
+    margin-top: -10px;
+  }
+
+  to {
+    margin-top: 0;
+  }
+}
+
+.category {
+  background-color: white;
+}
+
+.category:hover {
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
+#category-0 {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#category-31 {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.slide {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.category-desktop {
+  color: #555;
+}
+
+.category-desktop:hover {
+  color: black;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.icon-arrow {
+  color: #555;
+}
+
+.icon-arrow:hover {
+  color: black;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.icon-search {
+  opacity: 25%;
+}
+
+.icon-search:hover {
+  cursor: pointer;
+  opacity: 100%;
+  transition: 200ms;
+}
+
+.icon-cart {
+  opacity: 80%;
+}
+
+.icon-cart:hover {
+  opacity: 100%;
+  transition: 200ms;
+}

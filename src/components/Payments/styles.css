@@ -1,0 +1,17 @@
+.link:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.border-blue {
+  background-color: #3583fa;
+  border: 1.6px solid #3583fa;
+  height: 80px;
+}
+
+@media screen and ( max-width : 361px ) {
+
+  .border-blue {
+    margin-right: 12px;
+  }
+}
