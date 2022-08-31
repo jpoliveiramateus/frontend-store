@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import './styles.css';
+import { addProductToCart } from '../../redux/actions';
 
 function Products() {
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.reducerProducts.products);
   const loading = useSelector((state) => state.reducerProducts.loading);
 
@@ -76,6 +78,7 @@ function Products() {
                     type="button"
                     className="product-add-to-cart justify-content-end"
                     data-testid="product-add-to-cart"
+                    onClick={() => dispatch(addProductToCart(product))}
                   >
                     Adicionar ao carrinho
                   </button>

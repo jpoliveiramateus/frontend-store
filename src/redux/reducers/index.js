@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS, REQUEST_PRODUCT,
+import { ADD_PRODUCT_CART, FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS, REQUEST_PRODUCT,
   REQUEST_PRODUCTS, SET_MOBILE } from '../actions';
 
 const CATEGORIES_STATE = {};
@@ -69,9 +69,25 @@ const reducerProduct = (state = PRODUCT_STATE, action) => {
   }
 };
 
+const CART_STATE = { cart: [] };
+
+const reducerCart = (state = CART_STATE, action) => {
+  switch (action.type) {
+    case ADD_PRODUCT_CART:
+      const newListCart = [...state.cart];
+      newListCart.push(action.payload.product);
+      return {
+        cart: newListCart,
+      }
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({ reducerCategories,
   reducerSetMobile,
   reducerProducts,
-  reducerProduct });
+  reducerProduct,
+  reducerCart });
 
 export default rootReducer;

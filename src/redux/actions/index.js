@@ -65,3 +65,12 @@ export const thunkProduct = (productId) => async (dispatch) => {
     global.alert(e.message);
   }
 };
+
+export const ADD_PRODUCT_CART = 'ADD_PRODUCT_CART';
+
+export const addProductToCart = (product) => ({
+  type: ADD_PRODUCT_CART,
+  payload: {
+    product,
+  }
+});

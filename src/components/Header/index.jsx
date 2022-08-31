@@ -12,6 +12,7 @@ import './styles.css';
 
 function Header() {
   const dispatch = useDispatch();
+  const quantityProducts = useSelector((state) => state.reducerCart.cart);
   const mobile = useSelector((state) => state.reducerSetMobile.mobile);
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -95,7 +96,9 @@ function Header() {
               onClick={ () => history.push('/cart') }
               className="icon-cart fs-2 me-md-5 mb-1"
             />
-            <span className="shopping-cart-size shadow-sm" data-testid="shopping-cart-size">2</span>
+            <span className="shopping-cart-size shadow-sm" data-testid="shopping-cart-size">
+              {quantityProducts.length}
+            </span>
           </div>
         </ul>
       </nav>
