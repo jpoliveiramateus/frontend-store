@@ -14,7 +14,7 @@ function Categories({ menuOpen, setMenuOpen }) {
 
   useEffect(() => {
     dispatch(thunkCategories());
-  }, []);
+  }, [dispatch]);
 
   const slideLeft = () => {
     const move = 800;

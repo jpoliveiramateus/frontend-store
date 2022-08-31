@@ -22,7 +22,7 @@ function App() {
     } else {
       dispatch(setMobile(false));
     }
-  }, [width]);
+  }, [dispatch, width]);
 
   return (
     <BrowserRouter>
