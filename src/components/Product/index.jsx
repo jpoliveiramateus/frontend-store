@@ -49,6 +49,7 @@ const Product = ({ product }) => {
           {product.price
             .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
         </h2>
+        <p className="off-5">5% OFF com Mercado Crédito</p>
       </div>
     </section>
   );
