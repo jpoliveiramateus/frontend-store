@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+html {
+  background-color: #EBEBEB;
+}
+
 #root {
   min-height: 100vh;
   background-color: #EBEBEB;
