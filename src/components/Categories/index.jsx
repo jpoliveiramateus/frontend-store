@@ -1,20 +1,20 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useRef } from 'react';
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import { thunkCategories, thunkProducts } from '../../redux/actions';
+import { useDispatch, useSelector } from "react-redux";
 
-function Categories({ menuOpen, setMenuOpen, thunkCategoriesAPI, categoriesList, mobile,
-  thunkProductsAPI }) {
+function Categories({ menuOpen, setMenuOpen }) {
+  const dispatch = useDispatch();
+  const mobile = useSelector((state) => state.reducerSetMobile.mobile);
+  const categoriesList = useSelector((state) => state.reducerCategories.categories);
   const history = useHistory();
   const slide = useRef(null);
 
   useEffect(() => {
-    thunkCategoriesAPI();
-  }, [thunkCategoriesAPI]);
+    dispatch(thunkCategories());
+  }, []);
 
   const slideLeft = () => {
     const move = 800;
@@ -45,7 +45,7 @@ function Categories({ menuOpen, setMenuOpen, thunkCategoriesAPI, categoriesList,
                 p-3 w-100 border-bottom fw-light border-0"
               onClick={ () => {
                 history.push('/');
-                thunkProductsAPI(id);
+                dispatch(thunkProducts(id));
                 setMenuOpen(false);
               } }
             >
@@ -77,7 +77,7 @@ function Categories({ menuOpen, setMenuOpen, thunkCategoriesAPI, categoriesList,
                   backgroundColor: '#FFF059' } }
                 onClick={ () => {
                   history.push('/');
-                  thunkProductsAPI(id);
+                  dispatch(thunkProducts(id));
                 } }
               >
                 {name}
@@ -93,20 +93,4 @@ function Categories({ menuOpen, setMenuOpen, thunkCategoriesAPI, categoriesList,
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  thunkCategoriesAPI: () => dispatch(thunkCategories()),
-  thunkProductsAPI: (categoryId) => dispatch(thunkProducts(categoryId)),
-});
-
-const mapStateToProps = (state) => ({
-  categoriesList: state.reducerCategories.categories,
-  mobile: state.reducerSetMobile.mobile,
-});
-
-Categories.propTypes = {
-  thunkCategoriesAPI: propTypes.func.isRequired,
-  menuOpen: propTypes.bool.isRequired,
-  mobile: propTypes.bool.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default Categories;
