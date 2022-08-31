@@ -1,19 +1,20 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
 import Header from '../components/Header';
 import { thunkProduct } from '../redux/actions';
 import Product from '../components/Product';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ProductDetails = ({ thunkProductAPI, product, loading }) => {
+const ProductDetails = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const product = useSelector((state) => state.reducerProduct.product);
+  const loading = useSelector((state) => state.reducerProduct.loading);
   const productId = history.location.pathname.split('/')[2];
 
   useEffect(() => {
-    thunkProductAPI(productId);
-  }, [productId, thunkProductAPI]);
+    dispatch(thunkProduct(productId));
+  }, [dispatch, productId]);
 
   if (!loading && product) {
     return (
@@ -34,17 +35,4 @@ const ProductDetails = ({ thunkProductAPI, product, loading }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  thunkProductAPI: (productId) => dispatch(thunkProduct(productId)),
-});
-
-const mapStateToProps = (state) => ({
-  loading: state.reducerProduct.loading,
-  product: state.reducerProduct.product,
-});
-
-ProductDetails.propTypes = {
-  thunkProductAPI: propTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default ProductDetails;
