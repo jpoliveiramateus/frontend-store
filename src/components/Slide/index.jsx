@@ -1,9 +1,9 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import { useSelector } from "react-redux";
 
-function Slide({ mobile }) {
+function Slide() {
+  const mobile = useSelector((state) => state.reducerSetMobile.mobile);
   return (
     <Carousel>
       <Carousel.Item>
@@ -50,12 +50,4 @@ function Slide({ mobile }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  mobile: state.reducerSetMobile.mobile,
-});
-
-Slide.propTypes = {
-  mobile: propTypes.bool.isRequired,
-};
-
-export default connect(mapStateToProps)(Slide);
+export default Slide;
