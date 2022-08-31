@@ -4,9 +4,31 @@ import App from '../App';
 import mockedQueryResult from '../__mocks__/query';
 import mockFetch from '../__mocks__/mockFetch';
 import { Provider } from 'react-redux';
-import store from '../redux/store';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import rootReducer from '../redux/reducers';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 
 describe(`12 - Finalize a compra vendo um resumo dela, preenchendo os seus dados e escolhendo a forma de pagamento`, () => {
+  beforeEach(() => {
+    const persistConfig = {
+      key: 'root',
+      storage,
+    }
+    const persistedReducer = persistReducer(persistConfig, rootReducer)
+    const store = createStore(persistedReducer, applyMiddleware(thunk));
+    const persistor = persistStore(store);
+    jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
+    render(
+      <Provider store={ store }>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>);
+  });
+
   it(`Avalia se é possível, a partir de um carrinho de compras com produtos, acessar a página de checkout com um formulário válido`, async () => {
     const fullName = 'my full name';
     const email = 'my@email.com';
@@ -14,11 +36,6 @@ describe(`12 - Finalize a compra vendo um resumo dela, preenchendo os seus dados
     const phone = '99999999999';
     const cep = '99999999';
     const address = 'my address is where I live';
-    jest.spyOn(global, 'fetch').mockImplementation(mockFetch)
-    render(
-      <Provider store={ store }>
-        <App />
-      </Provider>);
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     fireEvent.click(screen.getAllByTestId('category')[0]);
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));

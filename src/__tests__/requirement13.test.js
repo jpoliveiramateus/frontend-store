@@ -3,7 +3,12 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import App from '../App';
 import mockFetch from '../__mocks__/mockFetch';
 import { Provider } from 'react-redux';
-import store from '../redux/store';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import rootReducer from '../redux/reducers';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 
 describe(`13 - Mostre junto ao ícone do carrinho a quantidade de produtos dentro dele, em todas as telas em que ele aparece`, () => {
 
@@ -13,10 +18,19 @@ describe(`13 - Mostre junto ao ícone do carrinho a quantidade de produtos dentr
 
   it('Avalia se a quantidade de produtos no carrinho da tela de listagem é renderizada corretamente', async () => {
 
-    jest.spyOn(global, 'fetch').mockImplementation(mockFetch)
+    const persistConfig = {
+      key: 'root',
+      storage,
+    }
+    const persistedReducer = persistReducer(persistConfig, rootReducer)
+    const store = createStore(persistedReducer, applyMiddleware(thunk));
+    const persistor = persistStore(store);
+    jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
     render(
       <Provider store={ store }>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>);
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     fireEvent.click(screen.getAllByTestId('category')[0]);
@@ -28,12 +42,21 @@ describe(`13 - Mostre junto ao ícone do carrinho a quantidade de produtos dentr
 
   it('Avalia se a quantidade de produtos no carrinho da tela de detalhes é renderizada corretamente', async () => {
 
+    const persistConfig = {
+      key: 'root',
+      storage,
+    }
+    const persistedReducer = persistReducer(persistConfig, rootReducer)
+    const store = createStore(persistedReducer, applyMiddleware(thunk));
+    const persistor = persistStore(store);
     jest.spyOn(global, 'fetch').mockImplementation((url) => {
       return mockFetch(url);
     });
     render(
       <Provider store={ store }>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>);
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     fireEvent.click(screen.getAllByTestId('category')[0]);

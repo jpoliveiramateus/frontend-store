@@ -4,22 +4,39 @@ import App from '../App';
 import mockedQueryResult from '../__mocks__/query';
 import mockFetch from '../__mocks__/mockFetch';
 import { Provider } from 'react-redux';
-import store from '../redux/store';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import rootReducer from '../redux/reducers';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 
 describe(`11 - Avalie e comente acerca de um produto em sua tela de exibição detalhada`, () => {
   afterEach(() => {
     global.fetch.mockClear();
   });
 
+  beforeEach(() => {
+    const persistConfig = {
+      key: 'root',
+      storage,
+    }
+    const persistedReducer = persistReducer(persistConfig, rootReducer)
+    const store = createStore(persistedReducer, applyMiddleware(thunk));
+    const persistor = persistStore(store);
+
+    jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
+    render(
+      <Provider store={ store }>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>);
+  });
+
   it('Avalia se é possível realizar uma avaliação na tela de detalhes de um produto', async () => {
     const evaluationEmail = `teste@trybe.com`;
     const evaluationContent = `Esta é uma avaliação sobre o produto realizada na tela de detalhe.`;
-    jest.spyOn(global, 'fetch').mockImplementation(mockFetch)
-    
-    render(
-      <Provider store={ store }>
-        <App />
-      </Provider>);
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     
     fireEvent.click(screen.getAllByTestId('category')[0]);
@@ -64,12 +81,6 @@ describe(`11 - Avalie e comente acerca de um produto em sua tela de exibição d
   it('Avalia se a avaliação continua após recarregar a pagina', async () => {
     const evaluationEmail = `teste@trybe.com`;
     const evaluationContent = "Esta é uma avaliação sobre o produto realizada na tela de detalhe.";
-    jest.spyOn(global, 'fetch').mockImplementation(mockFetch)
-    render(
-      <Provider store={ store }>
-        <App />
-      </Provider>);
-
     expect(await screen.findByText(evaluationEmail)).toBeVisible();
     expect(await screen.findByText(evaluationContent)).toBeVisible();
   });

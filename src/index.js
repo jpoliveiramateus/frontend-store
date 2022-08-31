@@ -12,8 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 ReactDOM.render(
   <Provider store={ store }>
     <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );
