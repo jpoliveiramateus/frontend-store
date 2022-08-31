@@ -3,15 +3,16 @@ import { BsCart2 } from 'react-icons/bs';
 import { BiMenu, BiMenuAltRight } from 'react-icons/bi';
 import { GrSearch } from 'react-icons/gr';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
 import { thunkProducts } from '../../redux/actions';
 import Categories from '../Categories';
 import logofrontend from '../../images/icon-frontend-logo.png';
 import iconfrontend from '../../images/icon-frontend.png';
+import { useDispatch, useSelector } from "react-redux";
 import './styles.css';
 
-function Header({ mobile, thunkProductsAPI }) {
+function Header() {
+  const dispatch = useDispatch();
+  const mobile = useSelector((state) => state.reducerSetMobile.mobile);
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -19,7 +20,7 @@ function Header({ mobile, thunkProductsAPI }) {
   const handleClick = () => setMenuOpen(!menuOpen);
 
   const dispatchSearch = () => {
-    thunkProductsAPI('', search);
+    dispatch(thunkProducts('', search));
     setSearch('');
   };
 
@@ -100,17 +101,4 @@ function Header({ mobile, thunkProductsAPI }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  mobile: state.reducerSetMobile.mobile,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  thunkProductsAPI: (categoryId, query) => dispatch(thunkProducts(categoryId, query)),
-});
-
-Header.propTypes = {
-  mobile: propTypes.bool.isRequired,
-  thunkProductsAPI: propTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
