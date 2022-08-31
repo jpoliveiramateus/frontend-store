@@ -88,12 +88,15 @@ function Header() {
             )
           )}
 
-          <BsCart2
-            type="button"
-            data-testid="shopping-cart-button"
-            onClick={ () => history.push('/cart') }
-            className="icon-cart fs-2 me-md-5 mb-1"
-          />
+          <div className="d-flex">
+            <BsCart2
+              type="button"
+              data-testid="shopping-cart-button"
+              onClick={ () => history.push('/cart') }
+              className="icon-cart fs-2 me-md-5 mb-1"
+            />
+            <span className="shopping-cart-size shadow-sm" data-testid="shopping-cart-size">2</span>
+          </div>
         </ul>
       </nav>
       <Categories menuOpen={ menuOpen } setMenuOpen={ setMenuOpen } />

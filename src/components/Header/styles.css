@@ -1,13 +1,4 @@
 /* stylelint-disable selector-max-specificity */
-
-@media screen and ( min-width : 768px ) {
-
-  .icon-menu {
-    display: none;
-  }
-
-}
-
 header div input {
   font-weight: 300;
 }
@@ -36,6 +27,20 @@ header div input::placeholder {
   to {
     margin-top: 0;
   }
+}
+
+.shopping-cart-size {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px;
+  margin-left: -57px;
+  border-radius: 50%;
+  background-color: white;
+  width: 23px;
+  height: 23px;
+  z-index: 1;
+  font-size: 12px;
 }
 
 .category {
@@ -100,4 +105,28 @@ header div input::placeholder {
 .icon-cart:hover {
   opacity: 100%;
   transition: 200ms;
+}
+
+@media screen and ( min-width : 768px ) {
+
+  .icon-menu {
+    display: none;
+  }
+
+}
+
+@media screen and ( max-width : 767px ) {
+
+  .shopping-cart-size {
+    margin-left: -13px;
+  }
+}
+
+@media screen and ( max-width : 596px ) {
+
+  .shopping-cart-size {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
 }
