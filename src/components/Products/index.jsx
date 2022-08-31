@@ -1,10 +1,12 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import './styles.css';
 
-function Products({ products, loading }) {
+function Products() {
+  const products = useSelector((state) => state.reducerProducts.products);
+  const loading = useSelector((state) => state.reducerProducts.loading);
+
   if (loading) {
     return (
       <section className="loading section-products">
@@ -91,9 +93,4 @@ function Products({ products, loading }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  products: state.reducerProducts.products,
-  loading: state.reducerProducts.loading,
-});
-
-export default connect(mapStateToProps)(Products);
+export default Products;
