@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../components/Header';
 import { thunkProduct } from '../redux/actions';
-import ProductDetail from '../components/ProductDetail';
+import Product from '../components/Product';
 
 const ProductDetails = ({ thunkProductAPI, product, loading }) => {
   const history = useHistory();
@@ -19,7 +19,7 @@ const ProductDetails = ({ thunkProductAPI, product, loading }) => {
     return (
       <>
         <Header />
-        <ProductDetail product={ product } />
+        <Product product={ product } />
       </>
     );
   }

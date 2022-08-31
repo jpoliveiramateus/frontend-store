@@ -7,6 +7,12 @@
   padding: 20px;
 }
 
+.container-images {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
 .product-detail-images {
   cursor: pointer;
   display: flex;
@@ -54,11 +60,15 @@
   }
 }
 
-@media screen and ( max-width : 768px ) {
+@media screen and ( max-width : 767px ) {
 
   .product-detail-img {
     height: 350px;
     width: 250px;
+  }
+
+  .container-images {
+    align-items: center;
   }
 
   .product-container {
