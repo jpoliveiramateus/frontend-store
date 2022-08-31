@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
 import { setMobile } from './redux/actions';
+import { useDispatch } from "react-redux";
 
 const SCREEN = 768;
 
-function App({ setMobileRedux }) {
+function App() {
+  const dispatch = useDispatch();
   const [width, setWidth] = useState(window.innerWidth);
 
   // https://blog.logrocket.com/developing-responsive-layouts-with-react-hooks/
@@ -18,11 +18,11 @@ function App({ setMobileRedux }) {
 
   useEffect(() => {
     if (window.innerWidth < SCREEN) {
-      setMobileRedux(true);
+      dispatch(setMobile(true));
     } else {
-      setMobileRedux(false);
+      dispatch(setMobile(false));
     }
-  }, [setMobileRedux, width]);
+  }, [width]);
 
   return (
     <BrowserRouter>
@@ -35,12 +35,4 @@ function App({ setMobileRedux }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setMobileRedux: (state) => dispatch(setMobile(state)),
-});
-
-App.propTypes = {
-  setMobileRedux: propTypes.func.isRequired,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
