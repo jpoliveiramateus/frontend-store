@@ -99,7 +99,7 @@
 .continue-purchase {
   padding: 10px 30px;
 
-  background-color: #295bff;
+  background-color: #4470ff;
   color: white;
 
   border: none;
@@ -108,7 +108,7 @@
 }
 
 .continue-purchase:hover {
-  background-color: #003cff;
+  background-color: #0033db;
   transition: 300ms;
 }
 
@@ -185,8 +185,14 @@
 
 @media screen and ( max-width : 767px ) {
 
-  .cart-container {
-    /* background-color: #d5dfff; */
+  .product-image-cart {
+    width: 150px;
+    height: 150px;
+  }
+
+  .product-desc-cart  {
+    width: 100%;
+    text-align: center;
   }
 
   .cart-product {
@@ -201,7 +207,8 @@
   }
 
   .continue-purchase-container button {
-    margin: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
   }
 
   .total-cart {

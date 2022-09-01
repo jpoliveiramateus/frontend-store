@@ -1,0 +1,24 @@
+.container-quantity-price {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 10px;
+}
+
+.icon-delete {
+  align-self: flex-end;
+
+  width: 23px;
+  height: 23px;
+  margin-top: -5px;
+
+  font-size: 14px;
+
+  border-radius: 50%;
+  border: none;
+
+  background-color: rgb(255, 83, 83);
+  color: white;
+
+  cursor: pointer;
+}
