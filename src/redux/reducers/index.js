@@ -69,15 +69,31 @@ const reducerProduct = (state = PRODUCT_STATE, action) => {
   }
 };
 
-const CART_STATE = { cart: [] };
+const CART_STATE = { cart: [], cartProducts: [] };
 
 const reducerCart = (state = CART_STATE, action) => {
   switch (action.type) {
     case ADD_PRODUCT_CART:
       const newListCart = [...state.cart];
       newListCart.push(action.payload.product);
+      const cartFiltered = newListCart.reduce((acc, product) => {
+        if (acc.some((current) => current.id === product.id)) {
+          acc.forEach((cur) => {
+            if (cur.id === product.id) {
+              cur.quantidade += 1
+            }
+          });
+          return acc
+        } else {
+          return acc.concat({ ...product, quantidade: 1 });
+        }
+      }, []);
+      const total = newListCart.reduce((acc, cur) => acc + cur.price, 0);
       return {
+        ...state,
         cart: newListCart,
+        cartProducts: cartFiltered,
+        total,
       }
     default:
       return state;
