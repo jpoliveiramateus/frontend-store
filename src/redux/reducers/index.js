@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { ADD_PRODUCT_CART, FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS, REQUEST_PRODUCT,
-  REQUEST_PRODUCTS, SET_MOBILE } from '../actions';
+import { ADD_PRODUCT_CART, FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS,
+  REMOVE_PRODUCT_CART, REQUEST_PRODUCT, REQUEST_PRODUCTS, SET_MOBILE } from '../actions';
 
 const CATEGORIES_STATE = {};
 
@@ -71,29 +71,41 @@ const reducerProduct = (state = PRODUCT_STATE, action) => {
 
 const CART_STATE = { cart: [], cartProducts: [] };
 
+const cartFiltered = (list) => {
+  return list.reduce((acc, product) => {
+    if (acc.some((current) => current.id === product.id)) {
+      acc.forEach((cur) => {
+        if (cur.id === product.id) {
+          cur.quantidade += 1
+        }
+      });
+      return acc
+    } else {
+      return acc.concat({ ...product, quantidade: 1 });
+    }
+  }, []);
+}
+
+const caculateTotal = (list) => list.reduce((acc, cur) => acc + cur.price, 0)
+
 const reducerCart = (state = CART_STATE, action) => {
   switch (action.type) {
     case ADD_PRODUCT_CART:
       const newListCart = [...state.cart];
       newListCart.push(action.payload.product);
-      const cartFiltered = newListCart.reduce((acc, product) => {
-        if (acc.some((current) => current.id === product.id)) {
-          acc.forEach((cur) => {
-            if (cur.id === product.id) {
-              cur.quantidade += 1
-            }
-          });
-          return acc
-        } else {
-          return acc.concat({ ...product, quantidade: 1 });
-        }
-      }, []);
-      const total = newListCart.reduce((acc, cur) => acc + cur.price, 0);
       return {
         ...state,
         cart: newListCart,
-        cartProducts: cartFiltered,
-        total,
+        cartProducts: cartFiltered(newListCart),
+        total: caculateTotal(newListCart),
+      }
+    case REMOVE_PRODUCT_CART:
+      const newList = state.cart.filter((product) => product.id !== action.payload.productId);
+      return {
+        ...state,
+        cart: newList,
+        cartProducts: cartFiltered(newList),
+        total: caculateTotal(newList),
       }
     default:
       return state;

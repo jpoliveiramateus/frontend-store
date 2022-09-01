@@ -1,15 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProductToCart, removeProductToCart } from '../../redux/actions';
 import './styles.css';
 
 const CardProduct = ({ cart }) => {
+  const dispatch = useDispatch();
   const total = useSelector((state) => state.reducerCart.total);
 
   return (
     <section className="cart-container">
         {cart.map((product) => (
           <div key={product.id} className="cart-product">
-            <button className="icon-delete">X</button>
+            <button
+              className="icon-delete"
+              onClick={() => dispatch(removeProductToCart(product.id))}
+            >
+              X
+            </button>
             <img className="product-image-cart" src={product.thumbnail} alt={product.title} />
             <div className="product-desc-cart">
               <div>
@@ -46,6 +53,7 @@ const CardProduct = ({ cart }) => {
                     data-testid="product-increase-quantity"
                     className={product.available_quantity === product.quantidade ? 'disable-button' : 'active-button'}
                     disabled={product.available_quantity === product.quantidade}
+                    onClick={() => dispatch(addProductToCart(product))}
                   >
                     +
                   </button>

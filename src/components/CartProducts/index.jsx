@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './styles.css';
 import CardProduct from '../CardProduct';
+import { addProductToCart, removeProductToCart } from '../../redux/actions';
 
 const CartProducts = () => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.reducerCart.cartProducts);
   const total = useSelector((state) => state.reducerCart.total);
   const mobile = useSelector((state) => state.reducerSetMobile.mobile);
@@ -49,7 +51,12 @@ const CartProducts = () => {
                 )
               }
             </div>
-            <button className="button-delete">Excluir</button>
+            <button
+              className="button-delete"
+              onClick={() => dispatch(removeProductToCart(product.id))}
+            >
+              Excluir
+            </button>
           </div>
           <div className="container-quantity">
             <div className="quantity-count">
@@ -65,6 +72,7 @@ const CartProducts = () => {
                 data-testid="product-increase-quantity"
                 className={product.available_quantity === product.quantidade ? 'disable-button' : 'active-button'}
                 disabled={product.available_quantity === product.quantidade}
+                onClick={() => dispatch(addProductToCart(product))}
               >
                 +
               </button>
