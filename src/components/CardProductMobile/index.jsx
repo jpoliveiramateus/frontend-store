@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart, removeProductToCart } from '../../redux/actions';
 import './styles.css';
 
-const CardProduct = ({ cart }) => {
+const CardProductMobile = ({ cart }) => {
   const dispatch = useDispatch();
   const total = useSelector((state) => state.reducerCart.total);
 
@@ -77,4 +77,4 @@ const CardProduct = ({ cart }) => {
   );
 }
 
-export default CardProduct;
+export default CardProductMobile;

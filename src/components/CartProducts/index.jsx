@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './styles.css';
-import CardProduct from '../CardProduct';
+import CardProductMobile from '../CardProductMobile';
 import { addProductToCart, removeProductToCart } from '../../redux/actions';
 
 const CartProducts = () => {
@@ -23,7 +23,7 @@ const CartProducts = () => {
 
   if (mobile) {
     return (
-      <CardProduct cart={cart} />
+      <CardProductMobile cart={cart} />
     );
   }
   
