@@ -26,6 +26,7 @@
 .product-image-cart {
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 
 .product-desc-cart {
@@ -110,6 +111,10 @@
 .continue-purchase:hover {
   background-color: #0033db;
   transition: 300ms;
+}
+
+.shopping-cart-product-name {
+  cursor: pointer;
 }
 
 @media screen and ( max-width : 1200px ) {

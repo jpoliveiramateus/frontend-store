@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { addProductToCart, removeProductToCart } from '../../redux/actions';
 import './styles.css';
 
 const CardProductMobile = ({ cart }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const total = useSelector((state) => state.reducerCart.total);
 
@@ -17,12 +19,18 @@ const CardProductMobile = ({ cart }) => {
             >
               X
             </button>
-            <img className="product-image-cart" src={product.thumbnail} alt={product.title} />
+            <img
+              className="product-image-cart"
+              src={product.thumbnail}
+              alt={product.title}
+              onClick={() => history.push(`/product/${product.id}`)}
+            />
             <div className="product-desc-cart">
               <div>
                 <h5
-                  className="fw-normal m-0"
+                  className="fw-normal m-0 shopping-cart-product-name"
                   data-testid="shopping-cart-product-name"
+                  onClick={() => history.push(`/product/${product.id}`)}
                 >
                   {product.title}
                 </h5>
