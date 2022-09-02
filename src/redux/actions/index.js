@@ -72,7 +72,7 @@ export const addProductToCart = (product) => ({
   type: ADD_PRODUCT_CART,
   payload: {
     product,
-  }
+  },
 });
 
 export const REMOVE_PRODUCT_CART = 'REMOVE_PRODUCT_CART';
@@ -81,5 +81,5 @@ export const removeProductToCart = (productId) => ({
   type: REMOVE_PRODUCT_CART,
   payload: {
     productId,
-  }
-})
+  },
+});

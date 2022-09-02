@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ADD_PRODUCT_CART, FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS,
-  REMOVE_PRODUCT_CART, REQUEST_PRODUCT, REQUEST_PRODUCTS, SET_MOBILE } from '../actions';
+REMOVE_PRODUCT_CART, REQUEST_PRODUCT, REQUEST_PRODUCTS, SET_MOBILE } from '../actions';
 
 const CATEGORIES_STATE = {};
 
@@ -71,7 +71,7 @@ const reducerProduct = (state = PRODUCT_STATE, action) => {
 
 const CART_STATE = { cart: [], cartProducts: [] };
 
-const cartFiltered = (list) => {
+const cartFilteredWithQuantity = (list) => {
   return list.reduce((acc, product) => {
     if (acc.some((current) => current.id === product.id)) {
       acc.forEach((cur) => {
@@ -96,7 +96,7 @@ const reducerCart = (state = CART_STATE, action) => {
       return {
         ...state,
         cart: newListCart,
-        cartProducts: cartFiltered(newListCart),
+        cartProducts: cartFilteredWithQuantity(newListCart),
         total: caculateTotal(newListCart),
       }
     case REMOVE_PRODUCT_CART:
@@ -104,7 +104,7 @@ const reducerCart = (state = CART_STATE, action) => {
       return {
         ...state,
         cart: newList,
-        cartProducts: cartFiltered(newList),
+        cartProducts: cartFilteredWithQuantity(newList),
         total: caculateTotal(newList),
       }
     default:
