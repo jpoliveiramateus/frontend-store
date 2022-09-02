@@ -1,0 +1,130 @@
+.container-avaliations {
+  margin-top: 40px;
+  border-top: 1px solid rgb(230, 230, 230);
+  padding: 40px;
+}
+
+.form-product-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.evaluation-title {
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+}
+
+/* https://codepen.io/gabrielcarvalhogama/pen/edwajP */
+.estrelas {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.estrelas input[type=radio] {
+  display: none;
+}
+
+.estrelas label i.fa{
+  font-size: 1.5em;
+  cursor: pointer
+}
+
+.estrelas label i.fa:before {
+  content:'\f005';
+  color: #3583FA;
+}
+
+.estrelas input[type=radio]:checked ~ label i.fa:before {
+  color: #CCC;
+}
+
+.container-reviews {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(230, 230, 230);
+}
+
+.title-reviews {
+  font-weight: normal;
+}
+
+.submit-review-btn {
+  border: none;
+  border-radius: 4px;
+
+  width: max-content;
+  padding: 10px 60px;
+
+  background-color: #4470ff;
+  color: white;
+}
+
+.submit-review-btn:hover {
+  background-color: #0033db;
+  transition: 400ms;
+}
+
+.container-email-rating {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 50%;
+}
+
+.product-detail-evaluation {
+  resize: none;
+  margin-top: 10px;
+  max-width: 50%;
+
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 3px;
+
+  padding: 10px;
+}
+
+.product-detail-email {
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 3px;
+  width: 100%;
+
+  padding: 5px 10px;
+}
+
+@media screen and ( max-width : 1200px ) {
+
+  .container-email-rating {
+    width: 70%;
+  }
+
+  .product-detail-evaluation {
+    max-width: 70%;
+  }
+}
+
+@media screen and ( max-width : 996px ) {
+
+  .container-avaliations {
+    padding: 20px;
+  }
+}
+
+@media screen and ( max-width : 768px ) {
+
+  .container-email-rating {
+    width: 100%;
+  }
+
+  .product-detail-evaluation {
+    max-width: 100%;
+  }
+}
+
+@media screen and ( max-width : 576px ) {
+
+  .container-email-rating {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
