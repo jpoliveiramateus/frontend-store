@@ -2,10 +2,13 @@
 import React, { useState } from 'react';
 import './styles.css';
 import propTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addProductToCart } from '../../redux/actions';
 
 const MAX_IMAGES = 6;
 
 const Product = ({ product }) => {
+  const dispatch = useDispatch();
   const [currentImage, setCurrentImage] = useState(0);
   // console.log(product);
   return (
@@ -50,6 +53,13 @@ const Product = ({ product }) => {
             .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
         </h2>
         <p className="off-5">5% OFF com Mercado Crédito</p>
+        <button
+          data-testid="product-detail-add-to-cart"
+          className="product-detail-add-to-cart"
+          onClick={() => dispatch(addProductToCart(product))}
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     </section>
   );
