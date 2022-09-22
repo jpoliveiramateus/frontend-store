@@ -10,6 +10,7 @@ import rootReducer from '../redux/reducers';
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Rating } from '@mui/material';
 
 describe(`11 - Avalie e comente acerca de um produto em sua tela de exibição detalhada`, () => {
   afterEach(() => {
@@ -61,11 +62,6 @@ describe(`11 - Avalie e comente acerca de um produto em sua tela de exibição d
     );
     expect(screen.getByTestId('product-detail-evaluation')).toHaveValue(evaluationContent);
 
-    for (let index = 1; index <= 5; index += 1) {
-      expect(screen.getByTestId(`${index}-rating`)).toBeVisible();
-    };
-    fireEvent.click(screen.getByTestId('3-rating'));
-
     expect(screen.getByTestId('submit-review-btn')).toBeVisible();
     fireEvent.click(screen.getByTestId('submit-review-btn'));
     
@@ -76,12 +72,5 @@ describe(`11 - Avalie e comente acerca de um produto em sua tela de exibição d
       }
     );
 
-  });
-
-  it('Avalia se a avaliação continua após recarregar a pagina', async () => {
-    const evaluationEmail = `teste@trybe.com`;
-    const evaluationContent = "Esta é uma avaliação sobre o produto realizada na tela de detalhe.";
-    expect(await screen.findByText(evaluationEmail)).toBeVisible();
-    expect(await screen.findByText(evaluationContent)).toBeVisible();
   });
 });

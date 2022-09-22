@@ -10,12 +10,12 @@ const Avaliations = ({ product }) => {
   
   const [email, setEmail] = useState('');
   const [avaliation, setAvaliation] = useState('');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(0);
 
   const clearForm = () => {
     setEmail('');
     setAvaliation('');
-    setRating('');
+    setRating(0);
   }
 
   // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
