@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ADD_PRODUCT_CART, FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS,
-REMOVE_PRODUCT_CART, REQUEST_PRODUCT, REQUEST_PRODUCTS, SET_MOBILE } from '../actions';
+REMOVE_PRODUCT_CART, REQUEST_PRODUCT, REQUEST_PRODUCTS, SET_AVALIATION, SET_MOBILE } from '../actions';
 
 const CATEGORIES_STATE = {};
 
@@ -112,10 +112,35 @@ const reducerCart = (state = CART_STATE, action) => {
   }
 }
 
+const AVALIATIONS_STATE = [];
+
+const reducerAvaliations = (state = AVALIATIONS_STATE, action) => {
+  switch (action.type) {
+    case SET_AVALIATION:
+      const productId = action.payload.productId;
+      // console.log(state[productId]);
+      if (state[productId]) {
+        return {
+          ...state,
+          [action.payload.productId]: [...state[productId], action.payload.avaliation],
+        }
+      }
+
+      return {
+        ...state,
+        [action.payload.productId]: [action.payload.avaliation],
+      }
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({ reducerCategories,
   reducerSetMobile,
   reducerProducts,
   reducerProduct,
-  reducerCart });
+  reducerCart,
+  reducerAvaliations,
+});
 
 export default rootReducer;

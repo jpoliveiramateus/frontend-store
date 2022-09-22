@@ -83,3 +83,13 @@ export const removeProductToCart = (productId) => ({
     productId,
   },
 });
+
+export const SET_AVALIATION = 'SET_AVALIATION';
+
+export const setAvaliations = (productId, avaliation) => ({
+  type: SET_AVALIATION,
+  payload: {
+    productId,
+    avaliation,
+  }
+});

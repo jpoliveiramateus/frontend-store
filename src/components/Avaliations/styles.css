@@ -15,30 +15,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* https://codepen.io/gabrielcarvalhogama/pen/edwajP */
-.estrelas {
-  display: flex;
-  gap: 0.3rem;
-}
-
-.estrelas input[type=radio] {
-  display: none;
-}
-
-.estrelas label i.fa{
-  font-size: 1.5em;
-  cursor: pointer
-}
-
-.estrelas label i.fa:before {
-  content:'\f005';
-  color: #3583FA;
-}
-
-.estrelas input[type=radio]:checked ~ label i.fa:before {
-  color: #CCC;
-}
-
 .container-reviews {
   margin-top: 20px;
   padding-top: 20px;
