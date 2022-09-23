@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './styles.css';
 import CardProductMobile from '../CardProductMobile';
-import { addProductToCart, removeProductToCart } from '../../redux/actions';
+import { addProductToCart, removeOneProductCart, removeProductToCart } from '../../redux/actions';
 import { useHistory } from 'react-router-dom';
 
 const CartProducts = () => {
@@ -72,6 +72,7 @@ const CartProducts = () => {
                 data-testid="product-decrease-quantity"
                 className={product.quantidade > 1 ? 'active-button' : 'disable-button'}
                 disabled={product.quantidade === 1}
+                onClick={() => dispatch(removeOneProductCart(product.id))}
               >
                 -
               </button>

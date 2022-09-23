@@ -101,7 +101,7 @@ const Avaliations = ({ product }) => {
         <div className="mt-5">
           {productReviews ? (
             productReviews.map((review, index) => (
-              <div className="w-100 border-bottom mb-2 p-2" key={`${review.email}-${index}`}>
+              <div className="w-100 border-bottom mb-2 p-2 text-break" key={`${review.email}-${index}`}>
                 <div className="d-flex flex-column flex-md-row justify-content-between">
                   <p className="m-0 mb-2 fw-bolder">{review.email}</p>
                   <Rating

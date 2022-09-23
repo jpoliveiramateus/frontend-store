@@ -84,6 +84,15 @@ export const removeProductToCart = (productId) => ({
   },
 });
 
+export const REMOVE_ONE_PRODUCT_CART = 'REMOVE_ONE_PRODUCT_CART';
+
+export const removeOneProductCart = (productId) => ({
+  type: REMOVE_ONE_PRODUCT_CART,
+  payload: {
+    productId,
+  }
+});
+
 export const SET_AVALIATION = 'SET_AVALIATION';
 
 export const setAvaliations = (productId, avaliation) => ({

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { ADD_PRODUCT_CART, FETCH_CATEGORIES, FETCH_PRODUCT, FETCH_PRODUCTS,
+  REMOVE_ONE_PRODUCT_CART,
 REMOVE_PRODUCT_CART, REQUEST_PRODUCT, REQUEST_PRODUCTS, SET_AVALIATION, SET_MOBILE } from '../actions';
 
 const CATEGORIES_STATE = {};
@@ -72,16 +73,16 @@ const reducerProduct = (state = PRODUCT_STATE, action) => {
 const CART_STATE = { cart: [], cartProducts: [] };
 
 const cartFilteredWithQuantity = (list) => {
-  return list.reduce((acc, product) => {
-    if (acc.some((current) => current.id === product.id)) {
-      acc.forEach((cur) => {
+  return list.reduce((arrayCart, product) => {
+    if (arrayCart.some((current) => current.id === product.id)) {
+      arrayCart.forEach((cur) => {
         if (cur.id === product.id) {
           cur.quantidade += 1
         }
       });
-      return acc
+      return arrayCart
     } else {
-      return acc.concat({ ...product, quantidade: 1 });
+      return arrayCart.concat({ ...product, quantidade: 1 });
     }
   }, []);
 }
@@ -107,6 +108,26 @@ const reducerCart = (state = CART_STATE, action) => {
         cartProducts: cartFilteredWithQuantity(newList),
         total: caculateTotal(newList),
       }
+    case REMOVE_ONE_PRODUCT_CART:
+      const products = state.cart;
+      const differentProducts = products.filter((product) => product.id !== action.payload.productId);
+      const sameProducts = products.filter((product) => product.id === action.payload.productId);
+      const sameProductsFilter = sameProducts.slice(1, sameProducts.length);
+      const listProducts = [...differentProducts, ...sameProductsFilter];
+
+      const listCartProducts = [...state.cartProducts];
+      listCartProducts.forEach((product) => {
+        if (product.id === action.payload.productId) {
+          product.quantidade -= 1;
+        };
+      });
+
+      return {
+        ...state,
+        cart: listProducts,
+        cartProducts: listCartProducts,
+        total: caculateTotal(listProducts),
+      }
     default:
       return state;
   }
@@ -118,7 +139,6 @@ const reducerAvaliations = (state = AVALIATIONS_STATE, action) => {
   switch (action.type) {
     case SET_AVALIATION:
       const productId = action.payload.productId;
-      // console.log(state[productId]);
       if (state[productId]) {
         return {
           ...state,
