@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAvaliations } from '../../redux/actions';
 import './styles.css';
-import { Rating } from '@mui/material';
+import { Rating, TextField } from '@mui/material';
 
 const Avaliations = ({ product }) => {
   const dispatch = useDispatch();
@@ -12,30 +12,27 @@ const Avaliations = ({ product }) => {
   const [avaliation, setAvaliation] = useState('');
   const [rating, setRating] = useState(0);
 
-  const clearForm = () => {
+  const [submitForm, setSubmitForm] = useState(false);
+
+  const clearFormAndSubmit = () => {
     setEmail('');
     setAvaliation('');
     setRating(0);
+    setSubmitForm(false);
   }
 
   // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
-  const validEmail = () => /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
+  const validateEmail = () => /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
 
   const validateForm = (e) => {
     e.preventDefault();
+    setSubmitForm(true);
 
-    if (validEmail(email) === false) {
-      return alert('Preencha o email(inválido)!');
+    if (validateEmail(email) === false || rating === 0) {
+      // break
+      return
     }
-
-    if (rating === '') {
-      return alert('De sua classificação!');
-    }
-
-    if (avaliation.length < 5) {
-      return alert('Preencha a avaliação!');
-    }
-
+    
     const avaliationPayload = {
       email,
       avaliation,
@@ -43,7 +40,7 @@ const Avaliations = ({ product }) => {
     }
 
     dispatch(setAvaliations(product.id, avaliationPayload));
-    clearForm();
+    clearFormAndSubmit();
   }
 
   return (
@@ -51,20 +48,22 @@ const Avaliations = ({ product }) => {
       <h3 className="evaluation-title">Avalie esse produto</h3>
       <form onSubmit={validateForm} className="form-product-detail">
         <div className="container-email-rating">
-          <input
+          <TextField
             type="email"
-            name="evaluation-email"
+            error={validateEmail(email) === false && submitForm}
+            id="standard-error-helper-text"
+            className="w-100 mb-2"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            id="evaluation-email"
-            data-testid="product-detail-email"
-            className="product-detail-email"
-            placeholder="Email"
+            label="Email"
+            helperText={(validateEmail(email) === false && submitForm) && `Email inválido.`}
+            variant="standard"
           />
         </div>
 
         <Rating
           name="simple-controlled"
+          data-testid="testeid"
           value={rating}
           size="large"
           className="w-25"
@@ -76,16 +75,16 @@ const Avaliations = ({ product }) => {
           }}
         />
 
-        <textarea
-          name="evaluation-detail"
-          id="evaluation-detail"
+        <TextField
+          helperText={(rating === 0 && submitForm) && `*Selecione sua classificação`}
+          error={rating === 0 && submitForm}
+          id="outlined-multiline-static"
           value={avaliation}
           onChange={(event) => setAvaliation(event.target.value)}
-          cols="40"
-          rows="5"
-          data-testid="product-detail-evaluation"
+          label="Faça sua avaliação desse produto"
           className="product-detail-evaluation"
-          placeholder="Faça sua avaliação desse produto!"
+          multiline
+          rows={4}
         />
         <br />
 
