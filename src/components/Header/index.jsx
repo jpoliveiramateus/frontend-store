@@ -12,7 +12,7 @@ import './styles.css';
 
 function Header() {
   const dispatch = useDispatch();
-  const quantityProducts = useSelector((state) => state.reducerCart.cart);
+  const quantityProducts = useSelector((state) => state.reducerCart.cartProducts);
   const mobile = useSelector((state) => state.reducerSetMobile.mobile);
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);

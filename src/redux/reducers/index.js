@@ -70,52 +70,56 @@ const reducerProduct = (state = PRODUCT_STATE, action) => {
   }
 };
 
-const CART_STATE = { cart: [], cartProducts: [] };
+const CART_STATE = { cartProducts: [] };
 
-const cartFilteredWithQuantity = (list) => {
-  return list.reduce((arrayCart, product) => {
-    if (arrayCart.some((current) => current.id === product.id)) {
-      arrayCart.forEach((cur) => {
-        if (cur.id === product.id) {
-          cur.quantidade += 1
-        }
-      });
-      return arrayCart
-    } else {
-      return arrayCart.concat({ ...product, quantidade: 1 });
-    }
-  }, []);
-}
+// const cartFilteredWithQuantity = (list) => {
+//   return list.reduce((arrayCart, product) => {
+//     if (arrayCart.some((current) => current.id === product.id)) {
+//       arrayCart.forEach((cur) => {
+//         if (cur.id === product.id) {
+//           cur.quantidade += 1
+//         }
+//       });
+//       return arrayCart
+//     } else {
+//       return arrayCart.concat({ ...product, quantidade: 1 });
+//     }
+//   }, []);
+// }
 
-const caculateTotal = (list) => list.reduce((acc, cur) => acc + cur.price, 0)
+// const caculateTotal = (list) => list.reduce((acc, cur) => acc + cur.price, 0)
 
 const reducerCart = (state = CART_STATE, action) => {
   switch (action.type) {
     case ADD_PRODUCT_CART:
-      const newListCart = [...state.cart];
-      newListCart.push(action.payload.product);
+      const newListCart = [...state.cartProducts];
+      const productById = newListCart.find((product) => product.id === action.payload.product.id);
+      let newListCartWithQuantity = [];
+      if (productById) {
+        newListCartWithQuantity = newListCart.map((product) => {
+          if (product.id === action.payload.product.id) {
+            product.quantidade += 1;
+            return product;
+          } else {
+            return product;
+          }
+        });
+      } else {
+        newListCartWithQuantity.push(...newListCart, { ...action.payload.product, quantidade: 1 })
+      }
       return {
         ...state,
-        cart: newListCart,
-        cartProducts: cartFilteredWithQuantity(newListCart),
-        total: caculateTotal(newListCart),
+        cartProducts: newListCartWithQuantity,
       }
     case REMOVE_PRODUCT_CART:
-      const newList = state.cart.filter((product) => product.id !== action.payload.productId);
+      const newList = state.cartProducts.filter((product) => product.id !== action.payload.productId);
       return {
         ...state,
-        cart: newList,
-        cartProducts: cartFilteredWithQuantity(newList),
-        total: caculateTotal(newList),
+        cartProducts: newList,
       }
     case REMOVE_ONE_PRODUCT_CART:
-      const products = state.cart;
-      const differentProducts = products.filter((product) => product.id !== action.payload.productId);
-      const sameProducts = products.filter((product) => product.id === action.payload.productId);
-      const sameProductsFilter = sameProducts.slice(1, sameProducts.length);
-      const listProducts = [...differentProducts, ...sameProductsFilter];
-
       const listCartProducts = [...state.cartProducts];
+
       listCartProducts.forEach((product) => {
         if (product.id === action.payload.productId) {
           product.quantidade -= 1;
@@ -124,9 +128,7 @@ const reducerCart = (state = CART_STATE, action) => {
 
       return {
         ...state,
-        cart: listProducts,
         cartProducts: listCartProducts,
-        total: caculateTotal(listProducts),
       }
     default:
       return state;
