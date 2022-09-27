@@ -12,11 +12,24 @@ import './styles.css';
 
 function Header() {
   const dispatch = useDispatch();
-  const quantityProducts = useSelector((state) => state.reducerCart.cartProducts);
+  const cartProducts = useSelector((state) => state.reducerCart.cartProducts);
   const mobile = useSelector((state) => state.reducerSetMobile.mobile);
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
+
+
+  const calculateQuantityProducts = () => {
+    let quantityProducts = 0;
+
+    cartProducts.forEach((product) => {
+      quantityProducts += product.quantidade;
+    });
+
+    return quantityProducts;
+  }
+
+
 
   const handleClick = () => setMenuOpen(!menuOpen);
 
@@ -97,7 +110,7 @@ function Header() {
               className="icon-cart fs-2 me-md-5 mb-1"
             />
             <span className="shopping-cart-size shadow-sm" data-testid="shopping-cart-size">
-              {quantityProducts.length}
+              {calculateQuantityProducts()}
             </span>
           </div>
         </ul>
