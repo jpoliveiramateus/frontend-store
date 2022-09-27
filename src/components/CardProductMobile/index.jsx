@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addProductToCart, removeProductToCart } from '../../redux/actions';
+import { addProductToCart, removeOneProductCart, removeProductToCart } from '../../redux/actions';
 import './styles.css';
 
 const CardProductMobile = ({ cart }) => {
@@ -53,6 +53,7 @@ const CardProductMobile = ({ cart }) => {
                     data-testid="product-decrease-quantity"
                     className={product.quantidade > 1 ? 'active-button' : 'disable-button'}
                     disabled={product.quantidade === 1}
+                    onClick={() => dispatch(removeOneProductCart(product.id))}
                   >
                     -
                   </button>
@@ -79,7 +80,13 @@ const CardProductMobile = ({ cart }) => {
           >
             {`Total ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}
           </h3>
-          <button className="continue-purchase">Continuar a compra</button>
+          <button
+            className="continue-purchase"
+            data-testid="checkout-products"
+            onClick={() => history.push('/checkout')}
+          >
+            Continuar a compra
+          </button>
         </div>
       </section>
   );
