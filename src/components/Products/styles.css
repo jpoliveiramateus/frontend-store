@@ -55,6 +55,12 @@
   margin: 0;
 }
 
+.product-installments {
+  margin: 0;
+  padding: 0;
+  color: #5da851;
+}
+
 .product-add-to-cart {
   background-color: #0d6efd;
   border: none;

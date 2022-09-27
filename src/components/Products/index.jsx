@@ -9,6 +9,7 @@ function Products() {
   const products = useSelector((state) => state.reducerProducts.products);
   const cartList = useSelector((state) => state.reducerCart.cartProducts);
   const loading = useSelector((state) => state.reducerProducts.loading);
+  console.log(products);
 
   if (loading) {
     return (
@@ -77,7 +78,11 @@ function Products() {
                     >
                       {product.title}
                     </h6>
-                    { product.shipping.free_shipping
+                    <p
+                      className='product-installments'
+                    >{`${product.installments.quantity}x `}{product.installments.amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                      {product.installments.rate === 0 && ' sem juros'}</p>
+                    {product.shipping.free_shipping
                       ? (
                         <p
                           className="free-shipping"
