@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles.css';
 import propTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart } from '../../redux/actions';
 import Avaliations from '../Avaliations';
 
@@ -10,7 +10,24 @@ const MAX_IMAGES = 6;
 const Product = ({ product }) => {
   const dispatch = useDispatch();
   const [currentImage, setCurrentImage] = useState(0);
-  // console.log(product);
+  const cartList = useSelector((state) => state.reducerCart.cartProducts);
+
+  const handleAddToCart = (product) => {
+    let availableQuantity = true;
+
+    cartList.forEach((productCart) => {
+      if (productCart.id === product.id && product.available_quantity === productCart.quantidade) {
+        availableQuantity = false;
+      }
+    });
+
+    if (availableQuantity) {
+      dispatch(addProductToCart(product));
+    } else {
+      window.alert('Quantidade indisponível');
+    }
+  }
+
   return (
     <section className="product-container shadow-sm">
       <div className="product-details-container">
@@ -57,7 +74,7 @@ const Product = ({ product }) => {
           <button
             data-testid="product-detail-add-to-cart"
             className="product-detail-add-to-cart"
-            onClick={() => dispatch(addProductToCart(product))}
+            onClick={() => handleAddToCart(product)}
           >
             Adicionar ao carrinho
           </button>

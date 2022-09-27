@@ -7,6 +7,7 @@ import { addProductToCart } from '../../redux/actions';
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.reducerProducts.products);
+  const cartList = useSelector((state) => state.reducerCart.cartProducts);
   const loading = useSelector((state) => state.reducerProducts.loading);
 
   if (loading) {
@@ -29,6 +30,22 @@ function Products() {
         </h3>
       </section>
     );
+  }
+
+  const handleAddToCart = (product) => {
+    let availableQuantity = true;
+
+    cartList.forEach((productCart) => {
+      if (productCart.id === product.id && product.available_quantity === productCart.quantidade) {
+        availableQuantity = false;
+      }
+    });
+
+    if (availableQuantity) {
+      dispatch(addProductToCart(product));
+    } else {
+      window.alert('Quantidade indisponível');
+    }
   }
 
   return (
@@ -78,7 +95,7 @@ function Products() {
                     type="button"
                     className="product-add-to-cart justify-content-end"
                     data-testid="product-add-to-cart"
-                    onClick={() => dispatch(addProductToCart(product))}
+                    onClick={() => handleAddToCart(product)}
                   >
                     Adicionar ao carrinho
                   </button>
