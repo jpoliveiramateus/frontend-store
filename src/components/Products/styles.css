@@ -59,6 +59,10 @@
   margin: 0;
   padding: 0;
   color: #5da851;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-add-to-cart {
@@ -93,6 +97,10 @@
   .products {
     gap: 1rem;
   }
+
+  .product-installments {
+    font-size: 15px;
+  }
 }
 
 @media screen and ( max-width : 431px ) {
@@ -120,5 +128,9 @@
 
   .price {
     font-size: 1.2rem;
+  }
+
+  .product-installments {
+    font-size: 13px;
   }
 }
