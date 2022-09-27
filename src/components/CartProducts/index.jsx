@@ -98,7 +98,13 @@ const CartProducts = () => {
         >
           {`Total ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}
         </h3>
-        <button className="continue-purchase">Continuar a compra</button>
+        <button
+          className="continue-purchase"
+          data-testid="checkout-products"
+          onClick={() => history.push('/checkout')}
+        >
+          Continuar a compra
+        </button>
       </div>
     </section>
   );

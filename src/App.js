@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
+
+import { setMobile } from './redux/actions';
+import { useDispatch } from "react-redux";
+
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
-import { setMobile } from './redux/actions';
-import { useDispatch } from "react-redux";
+import Checkout from './pages/Checkout';
 
 const SCREEN = 768;
 
@@ -27,6 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/checkout" component={ Checkout } />
         <Route path="/product/:id" component={ ProductDetails } />
         <Route path="/cart" component={ Cart } />
         <Route path="/" component={ Home } />
