@@ -1,0 +1,15 @@
+.purchase-button {
+  margin-top: 40px;
+  border: none;
+  border-radius: 4px;
+
+  padding: 10px 60px;
+
+  background-color: #4470ff;
+  color: white;
+}
+
+.purchase-button:hover {
+  background-color: #0033db;
+  transition: 400ms;
+}
