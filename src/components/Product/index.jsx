@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart } from '../../redux/actions';
 import Avaliations from '../Avaliations';
 import { Rating } from '@mui/material';
+import { BsTruck } from 'react-icons/bs';
 
 const MAX_IMAGES = 6;
 
@@ -92,12 +93,19 @@ const Product = ({ product }) => {
           />
           {product.shipping.free_shipping
             && (
-              <p
-                className="free-shipping"
-                data-testid="free-shipping"
-              >
-                Frete grátis
-              </p>
+              <div className='d-flex flex-co align-items-center gap-2 mb-2'>
+                <BsTruck
+                  className='fs-5'
+                  style={{ color: '#5da851' }}
+                />
+                <p
+                  className="free-shipping"
+                  data-testid="free-shipping"
+                  style={{ fontSize: '14px' }}
+                >
+                  Frete grátis
+                </p>
+              </div>
             )}
           <h2 className="fw-normal">
             {product.price
