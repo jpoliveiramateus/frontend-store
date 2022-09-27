@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import Header from '../components/Header';
+import ReviewProducts from '../components/ReviewProducts';
 
 function Checkout() {
   return (
     <>
       <Header />
-      <form className="product-container shadow-sm">
-      </form>
+      <ReviewProducts />
     </>
   )
 }
