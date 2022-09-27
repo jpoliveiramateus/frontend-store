@@ -14,6 +14,8 @@ const Product = ({ product }) => {
   const cartList = useSelector((state) => state.reducerCart.cartProducts);
   const productReviews = useSelector((state) => state.reducerAvaliations[product.id]);
 
+  console.log(product);
+
   const calculateAverageEvaluation = () => {
     let average = 0;
 
@@ -67,6 +69,12 @@ const Product = ({ product }) => {
           <section className="product-detail-images" />
         </div>
         <div className="product-container-info">
+          <p
+            className="mb-1 text-muted"
+            style={{ fontSize: '14px' }}
+          >
+            {product.condition === 'new' ? 'Novo' : 'Usado'} | {product.sold_quantity} vendidos
+          </p>
           <h5
             className="product-detail-name"
             data-testid="product-detail-name"
@@ -96,7 +104,13 @@ const Product = ({ product }) => {
               .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
           </h2>
           <p className="off-5">5% OFF com Mercado Crédito</p>
-          <p className="mb-2 fw-semibold">{product.available_quantity > 0 && 'Estoque disponível'}</p>
+          <p className="m-0 fw-semibold">{product.available_quantity > 0 && 'Estoque disponível'}</p>
+          <p
+            className="mb-3 text-muted fw-light"
+            style={{ fontSize: '14px', marginTop: '-4px' }}
+          >
+            ({product.available_quantity} disponíveis)
+          </p>
           <button
             data-testid="product-detail-add-to-cart"
             className="product-detail-add-to-cart"

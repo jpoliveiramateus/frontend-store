@@ -78,10 +78,12 @@ function Products() {
                     >
                       {product.title}
                     </h6>
-                    <p
-                      className='product-installments'
-                    >{`${product.installments.quantity}x `}{product.installments.amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
-                      {product.installments.rate === 0 && ' sem juros'}</p>
+                    {product?.installments && (
+                      <p
+                        className='product-installments'
+                      >{`${product.installments?.quantity}x `}{product.installments?.amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                        {product.installments?.rate === 0 && ' sem juros'}</p>
+                    )}
                     {product.shipping.free_shipping
                       ? (
                         <p

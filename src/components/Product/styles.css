@@ -65,6 +65,7 @@
 }
 
 .product-detail-add-to-cart {
+  width: 100%;
   border: none;
   border-radius: 4px;
 
@@ -97,6 +98,10 @@
   .product-detail-img {
     height: 350px;
     width: 250px;
+  }
+
+  .product-detail-add-to-cart {
+    width: auto;
   }
 
   .product-container-info {
