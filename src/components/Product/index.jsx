@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart } from '../../redux/actions';
 import Avaliations from '../Avaliations';
+import { Rating } from '@mui/material';
 
 const MAX_IMAGES = 6;
 
@@ -11,6 +12,21 @@ const Product = ({ product }) => {
   const dispatch = useDispatch();
   const [currentImage, setCurrentImage] = useState(0);
   const cartList = useSelector((state) => state.reducerCart.cartProducts);
+  const productReviews = useSelector((state) => state.reducerAvaliations[product.id]);
+
+  const calculateAverageEvaluation = () => {
+    let average = 0;
+
+    if (productReviews) {
+      productReviews.forEach((productReview) => {
+        average += productReview.rating
+      });
+
+      return (average / productReviews.length)
+    }
+
+    return 0;
+  }
 
   const handleAddToCart = (product) => {
     let availableQuantity = true;
@@ -57,6 +73,15 @@ const Product = ({ product }) => {
           >
             {product.title}
           </h5>
+          <Rating
+            className="me-3"
+            name="read-only"
+            value={calculateAverageEvaluation()}
+            sx={{
+              color: '#3483FA',
+            }}
+            readOnly
+          />
           {product.shipping.free_shipping
             && (
               <p
@@ -71,6 +96,7 @@ const Product = ({ product }) => {
               .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
           </h2>
           <p className="off-5">5% OFF com Mercado Crédito</p>
+          <p className="mb-2 fw-semibold">{product.available_quantity > 0 && 'Estoque disponível'}</p>
           <button
             data-testid="product-detail-add-to-cart"
             className="product-detail-add-to-cart"
