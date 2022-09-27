@@ -9,7 +9,7 @@ const CartProducts = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.reducerCart.cartProducts);
-  // const total = useSelector((state) => state.reducerCart.total);
+  const total = useSelector((state) => state.reducerCart.total);
   const mobile = useSelector((state) => state.reducerSetMobile.mobile);
 
   if (!cart.length) {
@@ -88,16 +88,16 @@ const CartProducts = () => {
             </div>
             <span className="quantity">{product.available_quantity} disponíveis</span>
           </div>
-          {/* <h4 className="product-price-cart fw-normal">{(product.price * product.quantidade)
-            .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h4> */}
+          <h4 className="product-price-cart fw-normal">{(product.price * product.quantidade)
+            .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h4>
         </div>
       ))}
       <div className="continue-purchase-container">
-        {/* <h3
+        <h3
           className="total-cart"
         >
           {`Total ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}
-        </h3> */}
+        </h3>
         <button className="continue-purchase">Continuar a compra</button>
       </div>
     </section>
