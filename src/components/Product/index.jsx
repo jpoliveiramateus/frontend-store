@@ -107,7 +107,10 @@ const Product = ({ product }) => {
                 </p>
               </div>
             )}
-          <h2 className="fw-normal">
+          <h2
+            className="fw-normal"
+            style={{ fontSize: '35px' }}
+          >
             {product.price
               .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
           </h2>
