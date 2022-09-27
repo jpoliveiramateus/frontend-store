@@ -51,13 +51,13 @@ const Avaliations = ({ product }) => {
           <TextField
             type="email"
             error={validateEmail(email) === false && submitForm}
-            id="standard-error-helper-text"
+            id="outlined-error-helper-text"
             className="w-100 mb-2"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             label="Email"
             helperText={(validateEmail(email) === false && submitForm) && `Email inválido.`}
-            variant="standard"
+            size="small"
           />
         </div>
 

@@ -15,8 +15,6 @@ const Product = ({ product }) => {
   const cartList = useSelector((state) => state.reducerCart.cartProducts);
   const productReviews = useSelector((state) => state.reducerAvaliations[product.id]);
 
-  console.log(product);
-
   const calculateAverageEvaluation = () => {
     let average = 0;
 
