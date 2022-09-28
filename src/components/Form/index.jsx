@@ -1,6 +1,7 @@
 import React from 'react';
-import { MenuItem, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import states from '../../__mocks__/states';
+import './styles.css';
 
 function Form() {
   return (
@@ -21,19 +22,18 @@ function Form() {
           <TextField type="text" id="outlined-basic" className='flex-grow-1' label="Complemento" variant="outlined" size="small" />
           <TextField type="number" id="outlined-basic" className="flex-grow-2" label="Número" variant="outlined" size="small" />
           <TextField type="text" id="outlined-basic" className="flex-grow-1" label="Cidade" variant="outlined" size="small" />
-          <TextField
-            id="outlined-select-currency"
-            select  
-            style={{ width: '200px' }}
-            label="Estado"
-            size="small"
+          <select
+            name="state"
+            id="state"
+            className="p-2 flex align-items-center"
           >
+            <option disabled defaultValue>Estado</option>
             {states.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <option key={option.value} value={option.value}>
                 {option.value}
-              </MenuItem>
+              </option>
             ))}
-          </TextField>
+          </select>
         </div>
       </form>
     </div>
