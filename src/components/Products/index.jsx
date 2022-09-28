@@ -9,7 +9,6 @@ function Products() {
   const products = useSelector((state) => state.reducerProducts.products);
   const cartList = useSelector((state) => state.reducerCart.cartProducts);
   const loading = useSelector((state) => state.reducerProducts.loading);
-  console.log(products);
 
   if (loading) {
     return (
