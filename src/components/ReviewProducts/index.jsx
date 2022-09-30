@@ -32,7 +32,7 @@ function ReviewProducts() {
           </div>
         </div>
       ))}
-      <h5 className="mt-2">{`Total ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}</h5>
+      <h5 className="mt-2">{total ? `Total ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` : `Carrinho Vazio`}</h5>
       </div>
     </div>
   )
