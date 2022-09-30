@@ -15,24 +15,28 @@ function PaymentMethod() {
             name="radio-buttons-group"
           >
             <div className="d-flex flex-column flex-md-row gap-1 gap-md-3 mt-3">
-              <div className="d-flex justify-content-between">
-                <FormControlLabel value="Boleto" control={<Radio />} label="Boleto" />
-                <FaBarcode style={{ fontSize: '80px' }} />
+              <div className="d-flex flex-column flex-lg-row align-items-stretch gap-3">
+                <div className="d-flex justify-content-between">
+                  <FormControlLabel value="Boleto" control={<Radio />} label="Boleto" />
+                  <FaBarcode style={{ fontSize: '80px' }} />
+                </div>
+
+                <div  className="d-flex justify-content-between">
+                  <FormControlLabel value="Visa" control={<Radio />} label="Visa" />
+                  <FaCcVisa style={{ fontSize: '80px' }} />
+                </div>
               </div>
 
-              <div  className="d-flex justify-content-between">
-                <FormControlLabel value="Visa" control={<Radio />} label="Visa" />
-                <FaCcVisa style={{ fontSize: '80px' }} />
-              </div>
+              <div className="d-flex flex-column flex-lg-row align-items-stretch gap-3">
+                <div className="d-flex justify-content-between">
+                  <FormControlLabel value="MasterCard" control={<Radio />} label="MasterCard" />
+                  <FaCcMastercard style={{ fontSize: '80px' }} />
+                </div>
 
-              <div className="d-flex justify-content-between">
-                <FormControlLabel value="MasterCard" control={<Radio />} label="MasterCard" />
-                <FaCcMastercard style={{ fontSize: '80px' }} />
-              </div>
-
-              <div className="d-flex justify-content-between">
-                <FormControlLabel value="Elo" control={<Radio />} label="Elo" />
-                <BsFillCreditCard2BackFill style={{ fontSize: '80px' }} />
+                <div className="d-flex justify-content-between">
+                  <FormControlLabel value="Elo" control={<Radio />} label="Elo" />
+                  <BsFillCreditCard2BackFill style={{ fontSize: '80px' }} />
+                </div>
               </div>
             </div>
           </RadioGroup>
