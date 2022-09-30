@@ -1,3 +1,5 @@
+import categories from './categories';
+
 export async function getCategories() {
   try {
     const response = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
@@ -5,7 +7,7 @@ export async function getCategories() {
     return data;
   } catch {
     alert('Falha ao buscar categorias!');
-    return [];
+    return categories;
   }
 }
 
