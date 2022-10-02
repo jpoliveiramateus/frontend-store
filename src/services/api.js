@@ -6,7 +6,6 @@ export async function getCategories() {
     const data = await response.json();
     return data;
   } catch (e) {
-    alert('Falha ao buscar categorias!');
     return categories;
   }
 }
