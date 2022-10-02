@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BsCart2 } from 'react-icons/bs';
+import { FiShoppingCart } from 'react-icons/fi';
 import { BiMenu, BiMenuAltRight } from 'react-icons/bi';
 import { GrSearch } from 'react-icons/gr';
 import { useHistory } from 'react-router-dom';
@@ -103,7 +103,7 @@ function Header() {
           )}
 
           <div className="d-flex">
-            <BsCart2
+            <FiShoppingCart
               type="button"
               data-testid="shopping-cart-button"
               onClick={ () => history.push('/cart') }
