@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { BiMenu, BiMenuAltRight } from 'react-icons/bi';
-import { BsCart2, BsSearch } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { thunkProducts } from '../../redux/actions';
 import Categories from '../Categories';
 import logofrontend from '../../images/icon-frontend-logo.png';
 import iconfrontend from '../../images/icon-frontend.png';
+import iconSearch from '../../images/icon-search.png';
+import iconCart from '../../images/icon-cart.png';
 import { useDispatch, useSelector } from "react-redux";
 import './styles.css';
 
@@ -72,9 +73,12 @@ function Header() {
                 }
               } }
             />
-            <BsSearch
+            <img
               className="icon-search me-2"
+              src={iconSearch}
+              alt="Icon Search"
               data-testid="query-button"
+              width="16px"
               onClick={ () => {
                 history.push('/');
                 dispatchSearch();
@@ -99,8 +103,9 @@ function Header() {
           )}
 
           <div className="d-flex">
-            <BsCart2
-              type="button"
+            <img
+              src={iconCart}
+              alt="Icon Cart"
               data-testid="shopping-cart-button"
               onClick={ () => history.push('/cart') }
               className="icon-cart fs-2 me-md-5 mb-1"

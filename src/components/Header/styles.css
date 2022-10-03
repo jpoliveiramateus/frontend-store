@@ -99,7 +99,9 @@ header div input::placeholder {
 }
 
 .icon-cart {
-  opacity: 80%;
+  cursor: pointer;
+  width: 32px;
+  opacity: 60%;
 }
 
 .icon-cart:hover {
