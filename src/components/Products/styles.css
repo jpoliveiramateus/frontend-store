@@ -110,7 +110,7 @@
   }
 
   .card {
-    width: 160px;
+    width: 180px;
   }
 
   .product-image {
@@ -133,4 +133,12 @@
   .product-installments {
     font-size: 13px;
   }
+}
+
+@media screen and ( max-width : 391px ) {
+
+  .card {
+    width: 160px;
+  }
+
 }
