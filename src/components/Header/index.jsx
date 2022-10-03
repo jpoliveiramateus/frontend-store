@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { FiShoppingCart } from 'react-icons/fi';
 import { BiMenu, BiMenuAltRight } from 'react-icons/bi';
-import { GrSearch } from 'react-icons/gr';
+import { BsCart2, BsSearch } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { thunkProducts } from '../../redux/actions';
 import Categories from '../Categories';
@@ -18,7 +17,6 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
 
-
   const calculateQuantityProducts = () => {
     let quantityProducts = 0;
 
@@ -28,8 +26,6 @@ function Header() {
 
     return quantityProducts;
   }
-
-
 
   const handleClick = () => setMenuOpen(!menuOpen);
 
@@ -76,7 +72,7 @@ function Header() {
                 }
               } }
             />
-            <GrSearch
+            <BsSearch
               className="icon-search me-2"
               data-testid="query-button"
               onClick={ () => {
@@ -103,7 +99,7 @@ function Header() {
           )}
 
           <div className="d-flex">
-            <FiShoppingCart
+            <BsCart2
               type="button"
               data-testid="shopping-cart-button"
               onClick={ () => history.push('/cart') }
