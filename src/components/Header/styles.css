@@ -89,23 +89,23 @@ header div input::placeholder {
 }
 
 .icon-search {
-  opacity: 25%;
+  cursor: pointer;
+  filter: opacity(25%);
 }
 
 .icon-search:hover {
-  cursor: pointer;
-  opacity: 100%;
+  filter: opacity(100%);
   transition: 200ms;
 }
 
 .icon-cart {
   cursor: pointer;
   width: 32px;
-  opacity: 60%;
+  filter: opacity(70%);
 }
 
 .icon-cart:hover {
-  opacity: 100%;
+  filter: opacity(100%);
   transition: 200ms;
 }
 
