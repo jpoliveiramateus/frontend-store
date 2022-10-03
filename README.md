@@ -103,10 +103,10 @@ npm test
 - Checkout: revise seus produtos e conclua sua compra inserindo seus dados. *https://frontend-store-jpoliveiramateus.vercel.app/checkout
 
 <div style="display: flex">
-   <img src="https://user-images.githubusercontent.com/99822908/193632004-d8daf9ce-8ffd-4d86-ac0a-9e9fafd2c879.png" height="480px"></img>
-   <img src="https://user-images.githubusercontent.com/99822908/193632187-955e6538-8535-42b8-a021-887dc2a13e11.png" height="480px"></img>
-   <img src="https://user-images.githubusercontent.com/99822908/193632451-30305f0f-c5e2-4242-9a7c-8c9070bb1eb3.png" height="480px"></img>
-   <img src="https://user-images.githubusercontent.com/99822908/193632717-da43ed21-eaa5-4b4b-a762-b8050dd6768f.png" height="480px"></img>
+   <img src="https://user-images.githubusercontent.com/99822908/193632004-d8daf9ce-8ffd-4d86-ac0a-9e9fafd2c879.png" height="380px"></img>
+   <img src="https://user-images.githubusercontent.com/99822908/193632187-955e6538-8535-42b8-a021-887dc2a13e11.png" height="380px"></img>
+   <img src="https://user-images.githubusercontent.com/99822908/193632451-30305f0f-c5e2-4242-9a7c-8c9070bb1eb3.png" height="380px"></img>
+   <img src="https://user-images.githubusercontent.com/99822908/193632717-da43ed21-eaa5-4b4b-a762-b8050dd6768f.png" height="380px"></img>
 </div>
 
 # 🤹 Algumas funções implementadas:
