@@ -9,7 +9,7 @@ Frontend de uma loja online, com essa aplicação o usuário pode:
 - Visualizar detalhes e avaliações prévias de um produto, bem como criar novas avaliações;
 - E por fim, finalizar a compra (simulada) dos itens selecionados.
 
-### Aplicação: https://frontend-store-jpoliveiramateus.vercel.app/
+### Aplicação: https://frontend-store-xi.vercel.app/
 
 # 📄 Sobre
 
@@ -97,10 +97,10 @@ npm test
 
 # 🔎 Rotas
 
-- Home: listagem de produtos. *https://frontend-store-jpoliveiramateus.vercel.app/
-- Product Details: detalhes do produto e avaliações. *https://frontend-store-jpoliveiramateus.vercel.app/product/MLB1968210028
-- Cart: listagem de produtos adicionados ao carrinho e calculo do total. *https://frontend-store-jpoliveiramateus.vercel.app/cart
-- Checkout: revise seus produtos e conclua sua compra inserindo seus dados. *https://frontend-store-jpoliveiramateus.vercel.app/checkout
+- Home: listagem de produtos. *https://frontend-store-xi.vercel.app/
+- Product Details: detalhes do produto e avaliações. *https://frontend-store-xi.vercel.app/product/MLB1968210028
+- Cart: listagem de produtos adicionados ao carrinho e calculo do total. *https://frontend-store-xi.vercel.app/cart
+- Checkout: revise seus produtos e conclua sua compra inserindo seus dados. *https://frontend-store-xi.vercel.app/checkout
 
 <div style="display: flex">
    <img src="https://user-images.githubusercontent.com/99822908/193632004-d8daf9ce-8ffd-4d86-ac0a-9e9fafd2c879.png" height="380px"></img>
